@@ -22,6 +22,7 @@
 		85BA17D518322E0E000A318C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85BA17B418322E0D000A318C /* UIKit.framework */; };
 		85BA17DD18322E0E000A318C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 85BA17DB18322E0E000A318C /* InfoPlist.strings */; };
 		85BA17DF18322E0E000A318C /* ProgressUpTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 85BA17DE18322E0E000A318C /* ProgressUpTests.m */; };
+		85DDA47C1832816800098D68 /* CurveView.m in Sources */ = {isa = PBXBuildFile; fileRef = 85DDA47B1832816800098D68 /* CurveView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,8 @@
 		85BA17DA18322E0E000A318C /* ProgressUpTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ProgressUpTests-Info.plist"; sourceTree = "<group>"; };
 		85BA17DC18322E0E000A318C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		85BA17DE18322E0E000A318C /* ProgressUpTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProgressUpTests.m; sourceTree = "<group>"; };
+		85DDA47A1832816800098D68 /* CurveView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurveView.h; sourceTree = "<group>"; };
+		85DDA47B1832816800098D68 /* CurveView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurveView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +123,8 @@
 				85BA17C518322E0D000A318C /* Main_iPad.storyboard */,
 				85BA17C818322E0D000A318C /* ViewController.h */,
 				85BA17C918322E0D000A318C /* ViewController.m */,
+				85DDA47A1832816800098D68 /* CurveView.h */,
+				85DDA47B1832816800098D68 /* CurveView.m */,
 				85BA17CB18322E0D000A318C /* Images.xcassets */,
 				85BA17B718322E0D000A318C /* Supporting Files */,
 			);
@@ -255,6 +260,7 @@
 			files = (
 				85BA17CA18322E0D000A318C /* ViewController.m in Sources */,
 				85BA17C118322E0D000A318C /* AppDelegate.m in Sources */,
+				85DDA47C1832816800098D68 /* CurveView.m in Sources */,
 				85BA17BD18322E0D000A318C /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

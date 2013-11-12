@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "CurveView.h"
 
 @interface ViewController ()
 
@@ -17,10 +18,14 @@
 
 UIImageView *balloon;
 UIView *balloonContainer;
+CurveView *curve;
 
 
 - (void)viewWillLayoutSubviews
 {
+    [balloonContainer removeFromSuperview];
+    [curve removeFromSuperview];
+    
     balloonContainer = [[UIImageView alloc]
                         initWithFrame:CGRectMake(
                                                  self.view.bounds.size.width/2 - balloon.bounds.size.width/2,
@@ -28,8 +33,19 @@ UIView *balloonContainer;
                                                  balloon.bounds.size.width,
                                                  balloon.bounds.size.width)
                         ];
+//    [balloonContainer setBackgroundColor:[UIColor redColor]];
     [balloonContainer addSubview:balloon];
     
+    curve = [[CurveView alloc]
+                        initWithFrame:CGRectMake(
+                                                 self.view.bounds.size.width * 0.1,
+                                                 self.view.bounds.size.height * 0.1,
+                                                 self.view.bounds.size.width * 0.8,
+                                                 self.view.bounds.size.height * 0.8)
+                        ];
+    [curve setBackgroundColor:[UIColor whiteColor]];
+    
+    [self.view addSubview:curve];
     [self.view addSubview:balloonContainer];
 }
 
