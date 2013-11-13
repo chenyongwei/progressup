@@ -3,12 +3,12 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "balloon.png"
+      "filename" : "ets-sp-theme-daylight.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "balloon-1.png"
+      "filename" : "ets-sp-theme-daylight-1.png"
     }
   ],
   "info" : {

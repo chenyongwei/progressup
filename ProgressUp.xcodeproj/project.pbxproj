@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8512D05B18335044003A02F7 /* ATGraphPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 8512D05818335044003A02F7 /* ATGraphPoint.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		8512D05C18335044003A02F7 /* ATSmoothCurveAlgorithm.m in Sources */ = {isa = PBXBuildFile; fileRef = 8512D05A18335044003A02F7 /* ATSmoothCurveAlgorithm.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		85BA17B118322E0D000A318C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85BA17B018322E0D000A318C /* Foundation.framework */; };
 		85BA17B318322E0D000A318C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85BA17B218322E0D000A318C /* CoreGraphics.framework */; };
 		85BA17B518322E0D000A318C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85BA17B418322E0D000A318C /* UIKit.framework */; };
@@ -36,6 +38,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8512D05218331CAE003A02F7 /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
+		8512D05718335044003A02F7 /* ATGraphPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATGraphPoint.h; sourceTree = "<group>"; };
+		8512D05818335044003A02F7 /* ATGraphPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATGraphPoint.m; sourceTree = "<group>"; };
+		8512D05918335044003A02F7 /* ATSmoothCurveAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATSmoothCurveAlgorithm.h; sourceTree = "<group>"; };
+		8512D05A18335044003A02F7 /* ATSmoothCurveAlgorithm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATSmoothCurveAlgorithm.m; sourceTree = "<group>"; };
 		85BA17AD18322E0D000A318C /* ProgressUp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProgressUp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		85BA17B018322E0D000A318C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		85BA17B218322E0D000A318C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -84,9 +91,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8512D05518335044003A02F7 /* 3rdParty */ = {
+			isa = PBXGroup;
+			children = (
+				8512D05618335044003A02F7 /* Smooth Curve Algorithm */,
+			);
+			path = 3rdParty;
+			sourceTree = "<group>";
+		};
+		8512D05618335044003A02F7 /* Smooth Curve Algorithm */ = {
+			isa = PBXGroup;
+			children = (
+				8512D05718335044003A02F7 /* ATGraphPoint.h */,
+				8512D05818335044003A02F7 /* ATGraphPoint.m */,
+				8512D05918335044003A02F7 /* ATSmoothCurveAlgorithm.h */,
+				8512D05A18335044003A02F7 /* ATSmoothCurveAlgorithm.m */,
+			);
+			path = "Smooth Curve Algorithm";
+			sourceTree = "<group>";
+		};
 		85BA17A418322E0D000A318C = {
 			isa = PBXGroup;
 			children = (
+				8512D05518335044003A02F7 /* 3rdParty */,
 				85BA17B618322E0D000A318C /* ProgressUp */,
 				85BA17D818322E0E000A318C /* ProgressUpTests */,
 				85BA17AF18322E0D000A318C /* Frameworks */,
@@ -138,6 +165,7 @@
 				85BA17B918322E0D000A318C /* InfoPlist.strings */,
 				85BA17BC18322E0D000A318C /* main.m */,
 				85BA17BE18322E0D000A318C /* ProgressUp-Prefix.pch */,
+				8512D05218331CAE003A02F7 /* Common.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -208,7 +236,7 @@
 				ORGANIZATIONNAME = Yongwei;
 				TargetAttributes = {
 					85BA17D018322E0E000A318C = {
-						TestTargetID = 85BA17AC18322E0D000A318C;
+						TestTargetID = 85BA17AC18322E0D000A318C /* ProgressUp */;
 					};
 				};
 			};
@@ -259,8 +287,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				85BA17CA18322E0D000A318C /* ViewController.m in Sources */,
+				8512D05B18335044003A02F7 /* ATGraphPoint.m in Sources */,
 				85BA17C118322E0D000A318C /* AppDelegate.m in Sources */,
 				85DDA47C1832816800098D68 /* CurveView.m in Sources */,
+				8512D05C18335044003A02F7 /* ATSmoothCurveAlgorithm.m in Sources */,
 				85BA17BD18322E0D000A318C /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

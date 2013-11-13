@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "CurveView.h"
 
+
 @interface ViewController ()
 
 @end
@@ -16,26 +17,46 @@
 
 @implementation ViewController
 
+
 UIImageView *balloon;
-UIView *balloonContainer;
+UIImageView *daylightBG;
 CurveView *curve;
 
 
 - (void)viewWillLayoutSubviews
 {
-    [balloonContainer removeFromSuperview];
+    [self layoutBackgroundImage];
+    [self layoutBalloon];
+    [self layoutCurve];
+}
+
+- (void)layoutBalloon {
+    balloon.frame = CGRectMake(
+                               0 + balloon.bounds.size.width,
+                               self.view.bounds.size.height * 0.8 - balloon.bounds.size.height,
+                               balloon.bounds.size.width,
+                               balloon.bounds.size.height);
+
+    [UIView animateWithDuration:2 delay:7 options:UIViewAnimationOptionCurveLinear animations:^{
+        int y = self.view.bounds.size.height * 0.5 - balloon.bounds.size.height - 100;
+        if (y < 0) {
+            y = balloon.bounds.size.height + 10;
+        }
+        balloon.frame = CGRectMake(
+                                   self.view.bounds.size.width * 0.9,
+                                   y,
+                                   balloon.bounds.size.width,
+                                   balloon.bounds.size.height);
+    } completion:^(BOOL finished){}];
+
+#if DEBUG_VIEW
+    [balloon setBackgroundColor:[UIColor redColor]];
+#endif
+    [self.view addSubview:balloon];
+}
+
+- (void)layoutCurve {
     [curve removeFromSuperview];
-    
-    balloonContainer = [[UIImageView alloc]
-                        initWithFrame:CGRectMake(
-                                                 self.view.bounds.size.width/2 - balloon.bounds.size.width/2,
-                                                 self.view.bounds.size.height/2 - balloon.bounds.size.height/2,
-                                                 balloon.bounds.size.width,
-                                                 balloon.bounds.size.width)
-                        ];
-//    [balloonContainer setBackgroundColor:[UIColor redColor]];
-    [balloonContainer addSubview:balloon];
-    
     curve = [[CurveView alloc]
                         initWithFrame:CGRectMake(
                                                  self.view.bounds.size.width * 0.1,
@@ -43,17 +64,28 @@ CurveView *curve;
                                                  self.view.bounds.size.width * 0.8,
                                                  self.view.bounds.size.height * 0.8)
                         ];
-    [curve setBackgroundColor:[UIColor whiteColor]];
-    
+    [curve setBackgroundColor:[UIColor colorWithWhite:0.0f alpha:0.0f]];
+
+#if DEBUG_VIEW
+    [curve setBackgroundColor:[UIColor yellowColor]];
+#endif
     [self.view addSubview:curve];
-    [self.view addSubview:balloonContainer];
 }
+
+- (void)layoutBackgroundImage {
+    [daylightBG removeFromSuperview];
+
+    daylightBG.frame = CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height);
+    [self.view addSubview:daylightBG];
+}
+
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
     balloon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"balloon"]];
-    
+    daylightBG = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"daylight-background"]];
 }
 
 - (void)didReceiveMemoryWarning

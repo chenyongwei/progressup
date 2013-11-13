@@ -3,12 +3,12 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "balloon.png"
+      "filename" : "activity_summary_tick.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "balloon-1.png"
+      "filename" : "activity_summary_tick@2x.png"
     }
   ],
   "info" : {

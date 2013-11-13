@@ -7,18 +7,13 @@
 //
 
 #import "CurveView.h"
+#import "ATGraphPoint.h"
+#import "ATSmoothCurveAlgorithm.h"
 
 @implementation CurveView
 
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code
-    }
-    return self;
-}
-
+const int lessonCount = 6;
+NSMutableArray *checkmarkViews;
 
 /*
 // Only override drawRect: if you perform custom drawing.
@@ -26,21 +21,98 @@
  */
 - (void)drawRect:(CGRect)rect
 {
-    
-    CGPoint point1 = CGPointMake(0, self.bounds.size.height);
-    CGPoint point2 = CGPointMake(self.bounds.size.width, self.bounds.size.height / 2);
+    NSMutableArray *knots= [self generateLessonPoints];
+    [self setupCurve:knots];
+    [self setupCheckmark:knots];
+}
 
-    CGPoint controlPoint1 = CGPointMake(self.bounds.size.width / 3, self.bounds.size.height / 10 * 9);
-    CGPoint controlPoint2 = CGPointMake(self.bounds.size.width / 3 * 2, self.bounds.size.height / 5 * 4);
+- (NSMutableArray *)generateLessonPoints {
+    NSMutableArray *knots = [[NSMutableArray alloc] init];
 
-    
-    UIBezierPath *path1 = [UIBezierPath bezierPath];
-    
-    [path1 setLineWidth:3.0];
-    [path1 moveToPoint:point1];
-    [path1 addCurveToPoint:point2 controlPoint1:controlPoint1 controlPoint2:controlPoint2];
+    int WIDTH = self.bounds.size.width;
+    int HEIGHT = self.bounds.size.height;
+
+
+    for (int i = 0; i < lessonCount; i++) {
+        int height;
+        if (i == 0) {
+            height = HEIGHT;
+        }
+        else {
+            height = HEIGHT / (lessonCount - i + 1) * (lessonCount - i);
+        }
+        CGPoint point = CGPointMake(WIDTH/lessonCount * i, height);
+
+        [knots addObject:[ATGraphPoint graphPointWithCGPoint:point]];
+    }
+    return knots;
+}
+
+- (void)setupCurve:(NSMutableArray *)knots {
+    NSMutableArray *firstControlPoints = [[NSMutableArray alloc] init];
+    NSMutableArray *secondControlPoints= [[NSMutableArray alloc] init];
+
+    [ATSmoothCurveAlgorithm getFromKnots:knots FirstControlPoints:firstControlPoints andSecondControlPoints:secondControlPoints];
+
+
+    UIBezierPath *path = [UIBezierPath bezierPath];
+    [path setLineWidth:1.0];
+
+    ATGraphPoint *p1 = [knots objectAtIndex:0];
+    [path moveToPoint:[p1 CGPointValue]];
+
+    for (int i=1; i<[knots count];i++) {
+
+        ATGraphPoint *kPointValue = [knots objectAtIndex:i];
+
+        ATGraphPoint *cPoint1Value = [firstControlPoints objectAtIndex:i-1];
+        ATGraphPoint *cPoint2Value = [secondControlPoints objectAtIndex:i-1];
+
+
+        UIBezierPath *ballBezierPath = [UIBezierPath bezierPathWithRoundedRect:CGRectMake([kPointValue CGPointValue].x - 5, [kPointValue CGPointValue].y - 5, 10, 10) cornerRadius:50];
+        [[UIColor whiteColor] setStroke];
+        [[UIColor greenColor] setFill];
+        [ballBezierPath stroke];
+        [ballBezierPath fill];
+
+
+        [path addCurveToPoint:[kPointValue CGPointValue] controlPoint1:[cPoint1Value CGPointValue] controlPoint2:[cPoint2Value CGPointValue]];
+    }
     [[UIColor grayColor] set];
-    [path1 stroke];
+
+    [path stroke];
+}
+
+- (void)setupCheckmark:(NSMutableArray *)knots {
+    checkmarkViews = [[NSMutableArray alloc] init];
+    for (int i = 0; i < lessonCount; i++) {
+        UIImageView *checkmark = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"checkmark-pass"]];
+        [checkmarkViews addObject:checkmark];
+    }
+
+    for (int i = 0; i < lessonCount; i++) {
+        UIImageView *checkmark = [checkmarkViews objectAtIndex:i];
+        [checkmark removeFromSuperview];
+        ATGraphPoint *kPointValue = [knots objectAtIndex:i];
+        checkmark.alpha = 0;
+        checkmark.frame = CGRectMake([kPointValue CGPointValue].x - 15, [kPointValue CGPointValue].y - 15, 30, 30);
+        [self addSubview:checkmark];
+
+        [UIView animateWithDuration:1.0f delay:i+1 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            checkmark.alpha = 1.0f;
+        } completion:^(BOOL finished) {
+        }];
+    }
+}
+
+
+- (id)initWithFrame:(CGRect)frame andLessonCount:(int)lessonCount
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        
+    }
+    return self;
 }
 
 @end
